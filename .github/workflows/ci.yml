@@ -1,14 +1,18 @@
 # Continuous integration for the desktop application.
-# Runs on every push and pull request on Windows, the only supported platform.
+# Runs on Windows, the only supported platform.
 # It needs no secrets: the build uses the development defaults (the mock API),
 # and the production URLs are set only when the installer is built.
+#
+# Automatic runs on push and pull request are switched off for now (Zain,
+# 27 Nov 2026). Everyone runs `npm run check` locally before every push. The
+# workflow can still be started by hand: Actions > CI > "Run workflow".
+# To switch automatic runs back on, add under `on:`:
+#   push:
+#     branches: ['**']
+#   pull_request:
 name: CI
 
 on:
-  push:
-    branches: ['**']
-  pull_request:
-  # "Run workflow" button on the Actions tab.
   workflow_dispatch:
 
 permissions:
