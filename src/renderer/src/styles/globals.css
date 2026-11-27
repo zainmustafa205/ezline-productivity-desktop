@@ -1,0 +1,181 @@
+/*
+ * Global styles and theme tokens (Violet Focus) of the desktop windows.
+ * Source of truth: docs/design-theme.md. The token values are the same as in
+ * the web app and the website. Hex values are the reference; they are written
+ * here in OKLCH, the color format of Tailwind CSS v4.
+ * Light mode only. Dark mode is future scope.
+ */
+
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+/* The dark variant applies only inside an element with the "dark" class, which the app never sets. */
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Surfaces and text */
+  --background: oklch(0.9842 0.0034 247.858); /* #F8FAFC */
+  --foreground: oklch(0.2077 0.0398 265.755); /* #0F172A */
+  --card: oklch(1 0 0); /* #FFFFFF */
+  --card-foreground: oklch(0.2077 0.0398 265.755); /* #0F172A */
+  --popover: oklch(1 0 0); /* #FFFFFF */
+  --popover-foreground: oklch(0.2077 0.0398 265.755); /* #0F172A */
+
+  /* Brand and actions */
+  --primary: oklch(0.4907 0.2412 292.581); /* #6D28D9 */
+  --primary-foreground: oklch(1 0 0); /* #FFFFFF */
+  --primary-hover: oklch(0.432 0.2106 292.759); /* #5B21B6 */
+  --secondary: oklch(0.9683 0.0069 247.896); /* #F1F5F9 */
+  --secondary-foreground: oklch(0.2077 0.0398 265.755); /* #0F172A */
+  --accent: oklch(0.9433 0.0284 294.588); /* #EDE9FE */
+  --accent-foreground: oklch(0.432 0.2106 292.759); /* #5B21B6 */
+  --muted: oklch(0.9683 0.0069 247.896); /* #F1F5F9 */
+  --muted-foreground: oklch(0.5544 0.0407 257.417); /* #64748B */
+
+  /* Lines and focus */
+  --border: oklch(0.9288 0.0126 255.508); /* #E2E8F0 */
+  --input: oklch(0.9288 0.0126 255.508); /* #E2E8F0 */
+  --ring: oklch(0.5413 0.2466 293.009); /* #7C3AED */
+
+  /* Status */
+  --destructive: oklch(0.5771 0.2152 27.325); /* #DC2626 */
+  --destructive-foreground: oklch(1 0 0); /* #FFFFFF */
+  --warning: oklch(0.6658 0.1574 58.318); /* #D97706 */
+  --warning-bg: oklch(0.9619 0.058 95.617); /* #FEF3C7 */
+  --warning-text: oklch(0.4732 0.1247 46.201); /* #92400E */
+  --success: oklch(0.6271 0.1699 149.214); /* #16A34A */
+  /* Success text on white (5.0:1); --success itself is for icons and fills only. */
+  --success-text: oklch(0.527 0.154 150.069); /* #15803D */
+
+  /* Sidebar */
+  --sidebar: oklch(1 0 0); /* #FFFFFF */
+  --sidebar-foreground: oklch(0.4455 0.0374 257.281); /* #475569 */
+  --sidebar-primary: oklch(0.4907 0.2412 292.581); /* #6D28D9 */
+  --sidebar-primary-foreground: oklch(1 0 0); /* #FFFFFF */
+  --sidebar-accent: oklch(0.9433 0.0284 294.588); /* #EDE9FE */
+  --sidebar-accent-foreground: oklch(0.432 0.2106 292.759); /* #5B21B6 */
+  --sidebar-border: oklch(0.9288 0.0126 255.508); /* #E2E8F0 */
+  --sidebar-ring: oklch(0.5413 0.2466 293.009); /* #7C3AED */
+
+  /* Brand scale (charts and illustrations) */
+  --brand-50: oklch(0.9691 0.0161 293.756); /* #F5F3FF */
+  --brand-100: oklch(0.9433 0.0284 294.588); /* #EDE9FE */
+  --brand-300: oklch(0.8112 0.1013 293.571); /* #C4B5FD */
+  --brand-500: oklch(0.6056 0.2189 292.717); /* #8B5CF6 */
+  --brand-600: oklch(0.5413 0.2466 293.009); /* #7C3AED */
+  --brand-700: oklch(0.4907 0.2412 292.581); /* #6D28D9 */
+  --brand-800: oklch(0.432 0.2106 292.759); /* #5B21B6 */
+
+  /* Activity colors (activity data only, never buttons or navigation) */
+  --activity-productive: oklch(0.6271 0.1699 149.214); /* #16A34A */
+  --activity-productive-bg: oklch(0.9624 0.0434 156.743); /* #DCFCE7 */
+  --activity-productive-text: oklch(0.4479 0.1083 151.328); /* #166534 */
+  --activity-unproductive: oklch(0.5771 0.2152 27.325); /* #DC2626 */
+  --activity-unproductive-bg: oklch(0.9356 0.0309 17.717); /* #FEE2E2 */
+  --activity-unproductive-text: oklch(0.4437 0.1613 26.899); /* #991B1B */
+  --activity-neutral: oklch(0.6806 0.1423 75.834); /* #CA8A04 */
+  --activity-neutral-bg: oklch(0.9729 0.0693 103.193); /* #FEF9C3 */
+  --activity-neutral-text: oklch(0.4762 0.1034 61.907); /* #854D0E */
+  --activity-idle: oklch(0.7107 0.0351 256.788); /* #94A3B8 */
+  --activity-idle-bg: oklch(0.9683 0.0069 247.896); /* #F1F5F9 */
+  --activity-idle-text: oklch(0.4455 0.0374 257.281); /* #475569 */
+  --activity-break: oklch(0.6231 0.188 259.815); /* #3B82F6 */
+  --activity-break-bg: oklch(0.9319 0.0316 255.585); /* #DBEAFE */
+  --activity-break-text: oklch(0.4244 0.1809 265.638); /* #1E40AF */
+
+  /* Shape: 8px for buttons, inputs and cards; 6px for small items */
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --font-sans:
+    'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  --font-heading: var(--font-sans);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-text: var(--warning-text);
+  --color-success: var(--success);
+  --color-success-text: var(--success-text);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-300: var(--brand-300);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+
+  --color-activity-productive: var(--activity-productive);
+  --color-activity-productive-bg: var(--activity-productive-bg);
+  --color-activity-productive-text: var(--activity-productive-text);
+  --color-activity-unproductive: var(--activity-unproductive);
+  --color-activity-unproductive-bg: var(--activity-unproductive-bg);
+  --color-activity-unproductive-text: var(--activity-unproductive-text);
+  --color-activity-neutral: var(--activity-neutral);
+  --color-activity-neutral-bg: var(--activity-neutral-bg);
+  --color-activity-neutral-text: var(--activity-neutral-text);
+  --color-activity-idle: var(--activity-idle);
+  --color-activity-idle-bg: var(--activity-idle-bg);
+  --color-activity-idle-text: var(--activity-idle-text);
+  --color-activity-break: var(--activity-break);
+  --color-activity-break-bg: var(--activity-break-bg);
+  --color-activity-break-text: var(--activity-break-text);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans antialiased;
+    color-scheme: light;
+  }
+
+  /* Body text: 14px / 20px (design-theme.md Section 5). */
+  body {
+    @apply bg-background text-sm text-foreground;
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
