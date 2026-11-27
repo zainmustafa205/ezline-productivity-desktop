@@ -1,0 +1,57 @@
+{
+  // Debugging in VS Code: Run and Debug panel (Ctrl+Shift+D).
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Main Process",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron-vite",
+      "windows": {
+        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron-vite.cmd"
+      },
+      "runtimeArgs": ["--sourcemap"],
+      "env": { "REMOTE_DEBUGGING_PORT": "9222" },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Debug Renderer Process",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}/src/renderer",
+      "timeout": 60000,
+      "presentation": { "hidden": true }
+    },
+    {
+      "name": "Mock API",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/tools/mock-api/server.ts",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Debug Unit Tests",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/node_modules/vitest/vitest.mjs",
+      "args": ["run"],
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug App (main and windows)",
+      "configurations": ["Debug Main Process", "Debug Renderer Process"],
+      "presentation": { "order": 1 }
+    },
+    {
+      "name": "Mock API and App",
+      "configurations": ["Mock API", "Debug Main Process", "Debug Renderer Process"],
+      "presentation": { "order": 2 }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc", "unicorn", "import", "jsx-a11y", "promise", "node"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "env": {
+    "node": true,
+    "es2024": true
+  },
+  "ignorePatterns": ["out", "dist", "release", "node_modules"],
+  "rules": {
+    "eqeqeq": "error",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "react/react-in-jsx-scope": "off",
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }],
+    "typescript/no-explicit-any": "error",
+    "typescript/consistent-type-imports": "error",
+    "typescript/no-floating-promises": "error",
+    "typescript/no-misused-promises": "error",
+    "import/no-cycle": "error",
+    "import/no-unassigned-import": ["warn", { "allow": ["**/*.css", "@fontsource-variable/**"] }]
+  },
+  "overrides": [
+    {
+      "files": ["src/renderer/**"],
+      "env": { "browser": true, "node": false }
+    },
+    {
+      "files": [
+        "tools/**",
+        "src/main/dev-tracker.ts",
+        "src/shared/fakes/console-notifier.ts",
+        "src/main/app/logger.ts"
+      ],
+      "rules": { "no-console": "off" }
+    }
+  ]
+}
