@@ -82,6 +82,8 @@ src/
     config/         Central configuration and theme values                         Zain only
     http/           Helpers that read backend answers (used by every API client)   Zain only
 tools/mock-api/     Local mock of the backend routes the app uses                  Zain
+docs/changes/       Change logs: Desktop-Changes-Bilal.md (Bilal),                 Bilal, Wasi
+                    Desktop-Changes-Wasi.md (Wasi); not checked by Prettier
 build/              Installer configuration and icons                              Zain, Chat 17b
 test/               Unit tests: test/app, test/shared, test/tools (Zain),
                     test/core (Bilal), test/tracking, test/storage, test/sync (Wasi)
