@@ -1,0 +1,57 @@
+# Continuous integration for the desktop application.
+# Runs on every push and pull request on Windows, the only supported platform.
+# It needs no secrets: the build uses the development defaults (the mock API),
+# and the production URLs are set only when the installer is built.
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Type check, lint, format, tests, build and audit
+    runs-on: windows-latest
+    timeout-minutes: 20
+
+    steps:
+      # Actions are pinned to a full commit SHA so a moved tag cannot change them.
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Unit tests
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev

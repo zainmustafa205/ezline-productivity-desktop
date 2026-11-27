@@ -1,0 +1,26 @@
+# Weekly dependency update pull requests against the dev branch.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    target-branch: dev
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    ignore:
+      # Node.js type definitions must match the Node.js major version in .nvmrc.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
+      # A new Electron major version changes the bundled Chromium and Node.js;
+      # it is updated by hand, after discussion and a full test.
+      - dependency-name: 'electron'
+        update-types: ['version-update:semver-major']
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: dev
+    schedule:
+      interval: weekly
